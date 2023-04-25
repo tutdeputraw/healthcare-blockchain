@@ -136,34 +136,34 @@ services:
     networks:
       - test
 
-  # cli:
-  #   container_name: cli
-  #   image: hyperledger/fabric-tools:2.0.0-beta
-  #   tty: true
-  #   environment:
-  #     - GOPATH=/opt/gopath
-  #     - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
-  #     - CORE_LOGGING_LEVEL=DEBUG
-  #     - CORE_PEER_ID=cli
-  #     - CORE_PEER_ADDRESS=peer0.org1.example.com:7051
-  #     - CORE_PEER_LOCALMSPID=Org1MSP
-  #     # - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/channel/crypto-config/Org1MSP
+  cli:
+    container_name: cli
+    image: hyperledger/fabric-tools:2.0.0-beta
+    tty: true
+    environment:
+      - GOPATH=/opt/gopath
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - CORE_LOGGING_LEVEL=DEBUG
+      - CORE_PEER_ID=cli
+      - CORE_PEER_ADDRESS=peer0.org1.example.com:7051
+      - CORE_PEER_LOCALMSPID=Org1MSP
+      # - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/channel/crypto-config/Org1MSP
 
-  #     - CORE_PEER_TLS_ENABLED=true
-  #     - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/channel/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/server.crt
-  #     - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/channel/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/server.key
-  #     - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/channel/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
-  #     - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/channel/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/channel/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/channel/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/channel/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/channel/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
 
-  #     - CORE_CHAINCODE_KEEPALIVE=10 
-  #   working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
-  #   command: /bin/bash
-  #   networks:
-  #     - test
-  #   volumes:
-  #     - /var/run/:/host/var/run/
-  #     # - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
-  #     - ./crypto-config/peerOrganizations/org1.example.com/:/etc/hyperledger/channel/crypto-config/peerOrganizations/org1.example.com/
-  #     - ./../vm2/crypto-config/peerOrganizations/org2.example.com/:/etc/hyperledger/channel/crypto-config/peerOrganizations/org2.example.com/
-  #     - ./../vm3/crypto-config/peerOrganizations/org3.example.com/:/etc/hyperledger/channel/crypto-config/peerOrganizations/org3.example.com/
-  #     - ./../vm4/crypto-config/ordererOrganizations/example.com/:/etc/hyperledger/channel/crypto-config/ordererOrganizations/example.com/
+      - CORE_CHAINCODE_KEEPALIVE=10 
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    command: /bin/bash
+    networks:
+      - test
+    volumes:
+      - /var/run/:/host/var/run/
+      # - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
+      - ./crypto-config/peerOrganizations/org1.example.com/:/etc/hyperledger/channel/crypto-config/peerOrganizations/org1.example.com/
+      - ./crypto-config/peerOrganizations/org2.example.com/:/etc/hyperledger/channel/crypto-config/peerOrganizations/org2.example.com/
+      - ./crypto-config/peerOrganizations/org3.example.com/:/etc/hyperledger/channel/crypto-config/peerOrganizations/org3.example.com/
+      - ./crypto-config/ordererOrganizations/example.com/:/etc/hyperledger/channel/crypto-config/ordererOrganizations/example.com/

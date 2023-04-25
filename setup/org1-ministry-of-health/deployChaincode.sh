@@ -18,8 +18,8 @@ echo "Path     : $CC_SRC_PATH";
 export CORE_PEER_TLS_ENABLED=true
 export ORDERER_CA=${PWD}/crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
 export PEER0_ORG1_CA=${PWD}/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
-# export PEER0_ORG2_CA=${PWD}/crypto-config/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt
-# export PEER0_ORG3_CA=${PWD}/crypto-config/peerOrganizations/org3.example.com/peers/peer0.org3.example.com/tls/ca.crt
+export PEER0_ORG2_CA=${PWD}/crypto-config/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt
+export PEER0_ORG3_CA=${PWD}/crypto-config/peerOrganizations/org3.example.com/peers/peer0.org3.example.com/tls/ca.crt
 export FABRIC_CFG_PATH=${PWD}/../../config
 export CHANNEL_NAME=mychannel
 
@@ -172,13 +172,13 @@ chaincodeQuery() {
 
 # packageChaincode
 # installChaincode
-queryInstalled
-approveForMyOrg1
+# queryInstalled
+# approveForMyOrg1
 # checkCommitReadyness
 # approveForMyOrg2
 # checkCommitReadyness
 # commitChaincodeDefination
-# queryCommitted
+queryCommitted
 # chaincodeInvokeInit
 # sleep 5
 # chaincodeInvoke

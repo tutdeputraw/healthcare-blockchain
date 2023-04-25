@@ -16,7 +16,7 @@ echo "Path     : $CC_SRC_PATH";
 
 
 export CORE_PEER_TLS_ENABLED=true
-export ORDERER_CA=${PWD}/orderer.tlsca.example.com-cert.pem
+export ORDERER_CA=${PWD}/orderer-cert/tlsca.example.com-cert.pem
 export PEER0_ORG2_CA=${PWD}/crypto-config/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt
 export FABRIC_CFG_PATH=${PWD}/../../config
 export CHANNEL_NAME=mychannel
@@ -46,34 +46,34 @@ presetup
 
 packageChaincode() {
     rm -rf ${CC_NAME}.tar.gz
-    setGlobalsForPeer0Org3
+    setGlobalsForPeer0Org2
     peer lifecycle chaincode package ${CC_NAME}.tar.gz \
         --path ${CC_SRC_PATH} --lang ${CC_RUNTIME_LANGUAGE} \
         --label ${CC_NAME}_${VERSION}
-    echo "===================== Chaincode is packaged on peer0.org3 ===================== "
+    echo "===================== Chaincode is packaged on peer0.org2 ===================== "
 }
 packageChaincode
 
 installChaincode() {
-    setGlobalsForPeer0Org3
+    setGlobalsForPeer0Org2
     peer lifecycle chaincode install ${CC_NAME}.tar.gz
-    echo "===================== Chaincode is installed on peer0.org3 ===================== "
+    echo "===================== Chaincode is installed on peer0.org2 ===================== "
 }
 installChaincode
 
 queryInstalled() {
-    setGlobalsForPeer0Org3
+    setGlobalsForPeer0Org2
     peer lifecycle chaincode queryinstalled >&log.txt
 
     cat log.txt
     PACKAGE_ID=$(sed -n "/${CC_NAME}_${VERSION}/{s/^Package ID: //; s/, Label:.*$//; p;}" log.txt)
     echo PackageID is ${PACKAGE_ID}
-    echo "===================== Query installed successful on peer0.org3 on channel ===================== "
+    echo "===================== Query installed successful on peer0.org2 on channel ===================== "
 }
 # queryInstalled
 
-approveForMyOrg3() {
-    setGlobalsForPeer0Org3
+approveForMyOrg2() {
+    setGlobalsForPeer0Org2
 
     peer lifecycle chaincode approveformyorg -o localhost:7050 \
         --ordererTLSHostnameOverride orderer.example.com --tls $CORE_PEER_TLS_ENABLED \
@@ -81,17 +81,17 @@ approveForMyOrg3() {
         --version ${VERSION} --init-required --package-id ${PACKAGE_ID} \
         --sequence ${VERSION}
 
-    echo "===================== chaincode approved from org 3 ===================== "
+    echo "===================== chaincode approved from org 2 ===================== "
 }
 queryInstalled
-approveForMyOrg3
+approveForMyOrg2
 
 checkCommitReadyness() {
 
-    setGlobalsForPeer0Org3
+    setGlobalsForPeer0Org2
     peer lifecycle chaincode checkcommitreadiness --channelID $CHANNEL_NAME \
-        --peerAddresses localhost:11051 --tlsRootCertFiles $PEER0_ORG3_CA \
+        --peerAddresses $CORE_PEER_ADDRESS --tlsRootCertFiles $PEER0_ORG2_CA \
         --name ${CC_NAME} --version ${VERSION} --sequence ${VERSION} --output json --init-required
-    echo "===================== checking commit readyness from org 3 ===================== "
+    echo "===================== checking commit readyness from org 2 ===================== "
 }
 checkCommitReadyness

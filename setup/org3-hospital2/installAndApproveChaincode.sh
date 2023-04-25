@@ -16,7 +16,7 @@ echo "Path     : $CC_SRC_PATH";
 
 
 export CORE_PEER_TLS_ENABLED=true
-export ORDERER_CA=${PWD}/orderer.tlsca.example.com-cert.pem
+export ORDERER_CA=${PWD}/orderer-cert/tlsca.example.com-cert.pem
 export PEER0_ORG3_CA=${PWD}/crypto-config/peerOrganizations/org3.example.com/peers/peer0.org3.example.com/tls/ca.crt
 export FABRIC_CFG_PATH=${PWD}/../../config
 export CHANNEL_NAME=mychannel
